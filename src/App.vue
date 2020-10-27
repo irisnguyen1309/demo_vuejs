@@ -1,32 +1,55 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
+    <search @on-search-student="searchStudent($event)"/>
     <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
+      <li v-for="student in students" :key="student.studentId">
+        {{student.name}}
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
+import Search from "./components/Search"
 export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      students : [
+        {
+          studentId: "18211TT0001",
+          name: "Đức Duy",
+          dateOfBirth: "01/01/2000"
+        },
+        {
+          studentId: "18211TT0002",
+          name: "Minh Tiến",
+          dateOfBirth: "01/01/2000"
+        },
+        {
+          studentId: "18211TT0003",
+          name: "Quỳnh Hương",
+          dateOfBirth: "01/01/2000"
+        },
+      ]
     }
-  }
+  },
+  methods: {
+    searchStudent(studentName) {
+      this.students = this.students.filter(student => student === studentName);
+    }
+  },
+  // computed: {
+  //   filteredStudents: function() {
+  //     var self = this;
+  //     return this.students.filter(function(student) {
+  //       return (
+  //         student.name.toLowerCase().indexOf(self.search.toLowerCase()) >= 0
+  //       );
+  //     });
+  //   },
+  // },
+  components: { Search },
 }
 </script>
 
